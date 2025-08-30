@@ -286,15 +286,22 @@ export default function PeopleDirectory(props: {
                   key={p.id}
                   className="border rounded-lg overflow-hidden hover:shadow-md transition"
                 >
-                  <div className="relative h-48 bg-slate-100">
+                  <div className="bg-slate-100">
                     <Image
                       src={p.image ?? "/images/people/placeholder.jpg"}
                       alt={p.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 25vw"
-                      className="object-cover"
+                      // Intrinsic ratio 3:4 = 600x800 (any 3:4 works)
+                      width={600}
+                      height={800}
+                      // Make it responsive and robust on mobile
+                      className="block w-full h-auto object-top"
+                      // Good size hints for responsive loading
+                      sizes="(min-width:1280px) 25vw, (min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
+
                   <div className="p-4">
                     <h3 className="text-lg font-semibold leading-tight">
                       {p.name}
